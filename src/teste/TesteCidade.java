@@ -23,9 +23,14 @@ public class TesteCidade {
 //		Cidade c3 = cidadeDAO.pesquisaId(3);
 //		System.out.println(c3.getIdCidade());
 //		System.out.println(c3.getNome());
-		
-		ArrayList<Cidade> lista = cidadeDAO.listarTudo();
-		System.out.println(lista);
+
+		Cidade cidadeAlterada = cidadeDAO.pesquisaNome("Ceres");
+		// Cidade cidadeAlterada = cidadeDAO.pesquisaId(1);
+		cidadeAlterada.setNome("CERES");
+		cidadeDAO.alterar(cidadeAlterada);
+
+		// ArrayList<Cidade> lista = cidadeDAO.listarTudo();
+		// System.out.println(lista);
 		
 		System.out.println("FIM");
 	}
