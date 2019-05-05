@@ -20,9 +20,11 @@ public class AlunoDAO {
         try {
             stmt = conexao.prepareStatement(sql);
             stmt.setString(1, aluno.getNome());
-            
+            stmt.setInt(2, aluno.getCidade().getIdCidade());
+            stmt.execute();
+            stmt.close();
         } catch (Exception e) {
-            //TODO: handle exception
+            throw new RuntimeException(e);
         }
     }
 }
