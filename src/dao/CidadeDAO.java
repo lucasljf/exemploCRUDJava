@@ -88,6 +88,7 @@ public class CidadeDAO {
 				cidade.setNome(rs.getString("nome"));
 				lista.add(cidade);
 			}
+			stmt.close();
 			return lista;
 		} catch (Exception e) {
 			throw new RuntimeException(e);

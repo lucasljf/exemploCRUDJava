@@ -2,6 +2,8 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import conexao.Conexao;
 import model.Aluno;
@@ -23,6 +25,28 @@ public class AlunoDAO {
             stmt.setInt(2, aluno.getCidade().getIdCidade());
             stmt.execute();
             stmt.close();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<Aluno> listarTudo() {
+        String sql = "SELECT * FROM aluno";
+        try {
+            stmt = conexao.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            ArrayList<Aluno> lista = new ArrayList<Aluno>();
+            while (rs.next()) {
+                Aluno aluno = new Aluno();
+                aluno.setIdAluno(rs.getInt("idAluno"));
+                aluno.setNome(rs.getString("nome"));
+
+                CidadeDAO cidadeDAO = new CidadeDAO();
+                aluno.setCidade(cidadeDAO.pesquisaId(rs.getInt("idCidade")));
+                lista.add(aluno);
+            }
+            stmt.close();
+            return lista;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
