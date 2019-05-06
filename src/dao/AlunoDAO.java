@@ -30,6 +30,27 @@ public class AlunoDAO {
         }
     }
 
+    public Aluno pesquisaNome(String nomeAluno) {
+        String sql = "SELECT * FROM aluno WHERE nome = ?";
+        try {
+            stmt = conexao.prepareStatement(sql);
+            stmt.setString(1, nomeAluno);
+            ResultSet rs = stmt.executeQuery();
+            Aluno aluno = new Aluno();
+            if (rs.next()) {
+                aluno.setIdAluno(rs.getInt("idAluno"));
+                aluno.setNome(rs.getString("nome"));
+                
+                CidadeDAO cidadeDAO = new CidadeDAO();
+                aluno.setCidade(cidadeDAO.pesquisaId(rs.getInt("idCidade")));
+            }
+            stmt.close();
+            return aluno;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public ArrayList<Aluno> listarTudo() {
         String sql = "SELECT * FROM aluno";
         try {

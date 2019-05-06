@@ -28,13 +28,20 @@ public class TesteAluno {
         // a1.setCidade(c1);
         // alunoDAO.inserir(a1);
 
+        Aluno alunoPesquisado = alunoDAO.pesquisaNome("Teste");
+        
+        if (alunoPesquisado.getIdAluno() != 0) {
+            System.out.println(alunoPesquisado.getIdAluno());
+            System.out.println(alunoPesquisado.getNome());
+            System.out.println(alunoPesquisado.getCidade().getNome());
+        }
+
         ArrayList<Aluno> alunos = alunoDAO.listarTudo();
         for (Aluno a : alunos) {
             System.out.println(a.getIdAluno());
             System.out.println(a.getNome());
             System.out.println(a.getCidade().getIdCidade());
             System.out.println(a.getCidade().getNome());
-            System.out.println("\n");
         }
     }
 }
