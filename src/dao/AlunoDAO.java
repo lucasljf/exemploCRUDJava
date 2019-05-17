@@ -40,7 +40,7 @@ public class AlunoDAO {
             if (rs.next()) {
                 aluno.setIdAluno(rs.getInt("idAluno"));
                 aluno.setNome(rs.getString("nome"));
-                
+
                 CidadeDAO cidadeDAO = new CidadeDAO();
                 aluno.setCidade(cidadeDAO.pesquisaId(rs.getInt("idCidade")));
             }
